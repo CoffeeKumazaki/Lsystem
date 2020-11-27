@@ -6,8 +6,12 @@ using namespace std;
 
 int main(int argc, char const *argv[]) {
 
-    LSystemBase l("t");
-    l.add_rule("t => tt+t");
+    LSystemBase l("aaa");
+    l.add_rule("s => asa");
+    l.add_rule("a => aa+s");
     l.show_rules();
+
+    l.iterate();
+    cout << l.get_condition() << endl;
     return 0;
 }

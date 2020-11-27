@@ -20,10 +20,11 @@ add_library(imgui STATIC
 )
 
 ## Define libraries
-# target_include_directories(${PROJECT_NAME}_lib include)
-# add_library(${PROJECT_NAME}_lib
-# 
-#)
+add_library(${PROJECT_NAME}_lib STATIC
+ src/Rule.cpp
+ src/LSystemBase.cpp
+)
+target_include_directories(${PROJECT_NAME}_lib PUBLIC include)
 
 ## Define the executable
 set(SRCS 
@@ -33,4 +34,4 @@ add_executable(${PROJECT_NAME} ${SRCS})
 target_include_directories(${PROJECT_NAME} PUBLIC
   include
 )
-target_link_libraries(${PROJECT_NAME} imgui)
+target_link_libraries(${PROJECT_NAME} imgui ${PROJECT_NAME}_lib)
