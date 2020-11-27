@@ -8,4 +8,8 @@
 #include <list>
 #include <map>
 
+#include <string>
+
 #include <algorithm>
+
+#include "typedef.hpp"
