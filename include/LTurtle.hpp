@@ -30,7 +30,7 @@ public:
   ~LTurtle();
 
   void init(float _step, float _angle);
-  void interpret(std::string condition);
+  void interpret(std::string condition, std::vector<char> constants = {});
   void draw(bool adjust = true);
 
   void moveto(Vector2D to);

@@ -22,7 +22,7 @@ void LTurtle::init(float _step, float _angle) {
   angle = _angle;
 }
 
-void LTurtle::interpret(std::string condition) {
+void LTurtle::interpret(std::string condition, std::vector<char> constants) {
 
   lines.clear();
   for (size_t i = 0; i < condition.size(); i++) {
@@ -41,7 +41,8 @@ void LTurtle::interpret(std::string condition) {
       restore();
       break;
     default:
-      moveForward(step);
+      if (std::find(constants.begin(), constants.end(), condition[i]) == constants.end())
+        moveForward(step);
       break;
     }
   }
