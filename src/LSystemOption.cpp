@@ -50,6 +50,15 @@ LSystemOption readSystemOption(std::string filepath) {
   }
 
   {
+    
+    c4::csubstr v = tree["constants"].val();
+    std::string a(v.str, v.len);
+    for (auto e : a) {
+      option.constants.push_back(e);
+    }
+  }
+
+  {
     ryml::NodeRef node = tree["iteration"];
     node >> option.iteration;
   }
