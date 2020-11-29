@@ -1,0 +1,8 @@
+name: "Sierpiński arrowhead curve"
+init: "A"
+rules:
+  - "A => B-A-B"
+  - "B => A+B+A"
+constants: ""
+angle: 60
+iteration: 6

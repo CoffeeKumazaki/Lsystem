@@ -1,0 +1,8 @@
+name: "Fractal plant"
+init: "X"
+rules:
+  - "X => F+[[X]-X]-F[-FX]+X"
+  - "F => FF"
+constants: ""
+angle: 25
+iteration: 6

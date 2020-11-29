@@ -1,0 +1,8 @@
+name: "Dragon Curve"
+init: "FX"
+rules:
+  - "X => X+YF+"
+  - "Y => -FX-Y"
+constants: "F"
+angle: 90
+iteration: 10

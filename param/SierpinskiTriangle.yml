@@ -3,5 +3,6 @@ init: "F-G-G"
 rules:
   - "F => F-G+F+G-F"
   - "G => GG"
+constants: ""
 angle: 120
 iteration: 4
