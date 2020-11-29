@@ -26,12 +26,12 @@ struct Line {
 class LTurtle
 {
 public:
-  LTurtle();
+  LTurtle(int win_w = 1280 , int win_h = 720, std::string win_title = "LSystem");
   ~LTurtle();
 
   void init(float _step, float _angle);
   void interpret(std::string condition);
-  void draw();
+  void draw(bool adjust = true);
 
   void moveto(Vector2D to);
   void moveForward(float step);
@@ -41,6 +41,8 @@ public:
   void save();
   void restore();
 
+  void adjust();
+
 private:
   float step;
   float angle; // rad.
@@ -49,4 +51,6 @@ private:
   std::stack<Position> stack;
 
   std::list<Line> lines;
+
+  Vector2D win_size;
 };

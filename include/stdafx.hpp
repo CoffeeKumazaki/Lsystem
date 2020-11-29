@@ -12,5 +12,6 @@
 
 #include <algorithm>
 #include <exception>
+#include <math.h>
 
 #include "typedef.hpp"

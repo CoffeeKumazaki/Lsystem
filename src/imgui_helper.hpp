@@ -34,7 +34,7 @@ static void glfw_error_callback(int error, const char* description) {
 
 static GLFWwindow *window = NULL;
 
-void initImgui() {
+void initImgui(int win_w = 1280 , int win_h = 720, std::string win_title = "LSystem") {
 
     // Setup window
     glfwSetErrorCallback(glfw_error_callback);
@@ -49,7 +49,7 @@ void initImgui() {
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);            // Required on Mac
 
     // Create window with graphics context
-    window = glfwCreateWindow(1280, 720, "Dear ImGui GLFW+OpenGL3 example", NULL, NULL);
+    window = glfwCreateWindow(win_w, win_h, win_title.c_str(), NULL, NULL);
     if (window == NULL)
         return;
     glfwMakeContextCurrent(window);
