@@ -11,17 +11,22 @@ double deg2rad (double degrees) {
 
 int main(int argc, char const *argv[]) {
 
-    LSystemBase l("F");
-    l.add_rule("F => F+F-F-F+F");
+    LSystemOption option = getDefaultSystemOption();
+    if (argc>0) {
+        option = readSystemOption(argv[1]);
+    } 
+
+    LSystemBase l(option.init, option.rules);
+
     l.show_rules();
 
-    l.iterate(4);
+    l.iterate(option.iteration);
     auto res = l.get_condition();
     cout << "[result]" << endl;
     cout << "  " << res << endl;
 
     LTurtle t;
-    t.init(50, deg2rad(90));
+    t.init(1, deg2rad(option.angle));
    // t.moveto({100, 700});
     t.interpret(res);
     t.draw();

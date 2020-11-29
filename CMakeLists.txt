@@ -25,15 +25,19 @@ add_library(imgui STATIC
   src/imgui/imgui_impl_opengl3.cpp
 )
 
+add_subdirectory(lib/rapidyaml ryml)
+
 ## Define libraries
 add_library(${PROJECT_NAME}_lib STATIC
  src/Rule.cpp
  src/LTurtle.cpp
  src/LSystemBase.cpp
+ src/LSystemOption.cpp
 )
 target_include_directories(${PROJECT_NAME}_lib PUBLIC 
   include
 )
+target_link_libraries(${PROJECT_NAME}_lib PUBLIC ryml)
 
 ## Define the executable
 set(SRCS 

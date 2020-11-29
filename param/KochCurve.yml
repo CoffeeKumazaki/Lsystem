@@ -1,0 +1,6 @@
+name: "Koch curve"
+init: "F"
+rules:
+  - "F => F+F-F-F+F"
+angle: 90
+iteration: 4

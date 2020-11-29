@@ -7,7 +7,8 @@ LTurtle::LTurtle(int win_w, int win_h, std::string win_title)
 : step(0)
 , angle(0)
 {
-  pos.pos.x = pos.pos.y = pos.dir = 0.0;
+  pos.pos.x = pos.pos.y = 0.0;
+  pos.dir = -M_PI_2;
   initImgui(win_w, win_h, win_title);
   win_size.x = (float)win_w;
   win_size.y = (float)win_h;
@@ -20,6 +21,7 @@ LTurtle::~LTurtle() {
 void LTurtle::init(float _step, float _angle) {
   step = _step;
   angle = _angle;
+  pos.dir += _angle;
 }
 
 void LTurtle::interpret(std::string condition, std::vector<char> constants) {
