@@ -1,0 +1,8 @@
+name: "Binary Tree"
+init: "F"
+rules:
+  - "F => G[+F]-F"
+  - "G => GG"
+constants: "F"
+angle: 45
+iteration: 5
