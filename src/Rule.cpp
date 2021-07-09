@@ -68,9 +68,7 @@ string Rule::convert() {
 
   float p = distr(eng);
   float ptot = 0.0;
-  cout << p << endl;
   for (auto r : rules) {
-    cout << r.first << " " << r.second << endl;
     if (r.second + ptot >= p) {
       return r.first;
     }
