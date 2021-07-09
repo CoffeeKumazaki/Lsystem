@@ -7,8 +7,8 @@ struct LSystemOption {
   std::vector<std::string> rules;
   std::vector<char> constants;
 
-  double angle; // [deg]
-  int iteration;
+  double angle = 90; // [deg]
+  int iteration = 5;
 };
 
 LSystemOption getDefaultSystemOption();

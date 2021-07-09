@@ -3,11 +3,30 @@
 #include <vector>
 #include <map>
 
-using Rule = std::pair<std::string, std::string>;
-using Rules = std::map<std::string, std::string>;
+using StocasticRule = std::pair<std::string /* rule */, float/* probability */>;
+using StocasticRules = std::vector<StocasticRule>;
+
+class Rule {
+  
+public:
+  Rule();
+  Rule(std::string srule);
+  std::string convert();
+
+  void print();
+
+private:
+  void parse_rule(std::string srule);
+
+public:
+  std::string pre;
+  StocasticRules rules;
+  float prob_tot = 0.0;
+};
+
+using Rules = std::map<std::string /* target */, Rule>;
 
 /*
   rule: A => A+B(0.7), A-B(0.3)
 */
 Rule string_to_rule(std::string srule);
-std::string removeSpace(std::string trg);

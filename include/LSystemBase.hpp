@@ -16,11 +16,8 @@ public:
 
   void show_rules() {
     std::cout << "[rules]" << std::endl;
-    for (auto r : rules)
-    {
-      std::cout << " ---" << std::endl;
-      std::cout << "  target: " << r.first << std::endl;
-      std::cout << "  rule  : " << r.second << std::endl;
+    for (auto r : rules) {
+      r.second.print();
     }
   }
 

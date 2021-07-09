@@ -25,13 +25,14 @@ LSystemBase::~LSystemBase() {
 }
 
 void LSystemBase::add_rule(Rule rule) {
-  rules.insert(rule);
+  rules[rule.pre] = rule;
 }
 
 void LSystemBase::add_rule(std::string srule) {
   try
   {
-    add_rule(string_to_rule(srule));
+    Rule r(srule);
+    add_rule(r);
   }
   catch(...)
   {
@@ -49,7 +50,7 @@ void LSystemBase::iterate(int n /*=1*/) {
       std::string key;
       key += variable[i];
       if (rules.count(key) > 0) {
-        new_v += rules[key];
+        new_v += rules[key].convert();
       }
       else {
         new_v += key;

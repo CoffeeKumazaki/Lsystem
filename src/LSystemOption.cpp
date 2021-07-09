@@ -22,6 +22,7 @@ LSystemOption readSystemOption(std::string filepath) {
   std::string yml = std::string(std::istreambuf_iterator<char>(ifs), std::istreambuf_iterator<char>());
 
   ryml::Tree tree = ryml::parse(c4::csubstr{ yml.c_str(), yml.length() });
+  ryml::NodeRef root = tree.rootref();
 
   {
     c4::csubstr v = tree["name"].val();
@@ -59,10 +60,14 @@ LSystemOption readSystemOption(std::string filepath) {
   }
 
   {
-    ryml::NodeRef node = tree["iteration"];
-    node >> option.iteration;
-  }
+    if (root.has_child("iteration")) {
+      ryml::NodeRef node = tree["iteration"];
+      node >> option.iteration;    
+    }
+    else {
 
+    }
+  }
 
   return option;
 }
