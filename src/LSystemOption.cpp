@@ -9,6 +9,7 @@ LSystemOption getDefaultSystemOption() {
   defaultOption.init = "F";
   defaultOption.constants.clear();
   defaultOption.rules.push_back("F => F+F-F-F+F");
+  defaultOption.step  = 1.0;
   defaultOption.angle = 90;
   defaultOption.iteration = 4;
 
@@ -46,8 +47,17 @@ LSystemOption readSystemOption(std::string filepath) {
   }
 
   {
-    ryml::NodeRef node = tree["angle"];
-    node >> option.angle;
+    if (root.has_child("step")) {
+      ryml::NodeRef node = tree["step"];
+      node >> option.step;
+    }
+  }
+
+  {
+    if (root.has_child("angle")) {
+      ryml::NodeRef node = tree["angle"];
+      node >> option.angle;
+    }
   }
 
   {
@@ -63,9 +73,6 @@ LSystemOption readSystemOption(std::string filepath) {
     if (root.has_child("iteration")) {
       ryml::NodeRef node = tree["iteration"];
       node >> option.iteration;    
-    }
-    else {
-
     }
   }
 

@@ -7,6 +7,7 @@ struct LSystemOption {
   std::vector<std::string> rules;
   std::vector<char> constants;
 
+  double step  = 1.0;
   double angle = 90; // [deg]
   int iteration = 5;
 };

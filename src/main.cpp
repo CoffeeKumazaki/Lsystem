@@ -26,7 +26,7 @@ int main(int argc, char const *argv[]) {
     cout << "  " << res << endl;
 
     LTurtle t;
-    t.init(1, deg2rad(option.angle));
+    t.init(option.step, deg2rad(option.angle));
    // t.moveto({100, 700});
     t.interpret(res);
     t.draw();
