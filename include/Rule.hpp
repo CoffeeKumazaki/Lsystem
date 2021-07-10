@@ -25,8 +25,3 @@ public:
 };
 
 using Rules = std::map<std::string /* target */, Rule>;
-
-/*
-  rule: A => A+B(0.7), A-B(0.3)
-*/
-Rule string_to_rule(std::string srule);

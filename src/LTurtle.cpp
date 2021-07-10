@@ -24,17 +24,43 @@ void LTurtle::init(float _step, float _angle) {
   pos.dir += _angle;
 }
 
+float getVal(std::string s, float def, int& step) {
+
+  float ret = def;
+  if (s[0]=='{') {
+    auto pos = s.find("}");
+    std::string ss = s.substr(1,pos-1);
+    auto pos1 = ss.find(":");
+    if (pos1 != -1) {
+      float mean = std::stof(ss.substr(0, pos1));
+      float dev = std::stof(ss.substr(pos1+1, pos-pos1-1));
+
+      std::random_device rd;
+      std::default_random_engine eng(rd());
+      std::uniform_real_distribution<float> dist(-dev, dev);
+      ret = dist(eng) + mean;
+    }
+    else {
+      ret = std::stof(ss);
+    }
+    step = pos+1;
+  }
+
+  return ret;
+}
+
 void LTurtle::interpret(std::string condition, std::vector<char> constants) {
 
   lines.clear();
   for (size_t i = 0; i < condition.size(); i++) {
+    int ads = 0;
     switch (condition[i])
     {
     case '+':
-      turnRight(angle);
+      turnRight(deg2rad(getVal(condition.substr(i+1), rad2deg(angle), ads)));
       break;
     case '-':
-      turnLeft(angle);
+      turnLeft(deg2rad(getVal(condition.substr(i+1), rad2deg(angle), ads)));
       break;
     case '[':
       save();
@@ -44,9 +70,11 @@ void LTurtle::interpret(std::string condition, std::vector<char> constants) {
       break;
     default:
       if (std::find(constants.begin(), constants.end(), condition[i]) == constants.end())
-        moveForward(step);
+        moveForward(getVal(condition.substr(i+1), step, ads));
       break;
     }
+    i+= ads;
+    if (i > condition.size()) break;
   }
   
 }
@@ -84,7 +112,8 @@ void LTurtle::draw(bool adjust) {
           ImGui::GetColorU32(ImVec4(1.0, 1.0, 1.0, 1.0)),
           3.0
           );
-          dc++;
+        // draw_list->AddCircleFilled(ImVec2(line.start.x, line.start.y), 3.0, ImGui::GetColorU32(ImVec4(1.0, 1.0, 1.0, 1.0)));
+        dc++;
       }
     }
 
@@ -99,7 +128,7 @@ void LTurtle::draw(bool adjust) {
 
     glfwSwapBuffers(window);
     cnt++;
-    cnt %= (lines.size() + 10);
+    // cnt %= (lines.size() + 10);
   }
 }
 
@@ -147,21 +176,21 @@ void LTurtle::moveto(Vector2D to) {
   pos.pos = to;
 }
 
-void LTurtle::moveForward(float step) {
+void LTurtle::moveForward(float _step) {
 
   Vector2D prev = pos.pos;
-  pos.pos.x += step * cos(pos.dir);
-  pos.pos.y += step * sin(pos.dir);
+  pos.pos.x += _step * cos(pos.dir);
+  pos.pos.y += _step * sin(pos.dir);
 
   lines.push_back({prev, pos.pos});
 }
 
-void LTurtle::turnRight(float angle) {
-  pos.dir -= angle;
+void LTurtle::turnRight(float _angle) {
+  pos.dir -= _angle;
 }
 
-void LTurtle::turnLeft(float angle) {
-  pos.dir += angle;
+void LTurtle::turnLeft(float _angle) {
+  pos.dir += _angle;
 }
 
 void LTurtle::save() {
@@ -169,7 +198,9 @@ void LTurtle::save() {
 }
 
 void LTurtle::restore() {
-  pos = stack.top();
-  stack.pop();
+  if (!stack.empty()) {
+    pos = stack.top();
+    stack.pop();
+  }
 }
 

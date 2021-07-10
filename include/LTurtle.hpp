@@ -23,6 +23,13 @@ struct Line {
   Vector2D start, end;
 };
 
+class LGraphNode {
+
+public:
+  LGraphNode();
+  ~LGraphNode();
+};
+
 class LTurtle
 {
 public:

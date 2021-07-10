@@ -44,13 +44,13 @@ void Rule::parse_rule(string srule) {
   auto pos2 = srule.find(")");
   if (pos1 != -1 && pos2 != -1) {
     string r = srule.substr(0, pos1);
-    float p = stof(srule.substr(pos1+2, pos2));
-    cout << r << " " << p << endl;
+    float p = stof(srule.substr(pos1+2, pos2-pos1-2));
+    // cout << r << " " << p << endl;
     rules.push_back(StocasticRule(r, p));
     prob_tot += p;
   }
   else if (pos1 == -1 && pos2 == -1) {
-    cout << srule << endl;
+    // cout << srule << endl;
     float p = (prob_tot > 0) ? max(0.0, 1.0 - prob_tot) : 1.0;
     rules.push_back(StocasticRule(srule, p));
     prob_tot += p;
@@ -85,13 +85,4 @@ void Rule::print() {
     cout <<  ((i == 0) ? "  rule   : " : "           ") + rules[i].first 
          <<  " (" << rules[i].second << ")" << endl;
   }  
-}
-
-/*
-  rule: A => A+B(0.7), A-B(0.3)
-*/
-Rule string_to_rule(string srule) {
-
-  Rule r(srule);
-  return r;
 }

@@ -1,0 +1,9 @@
+name: "Kato rule"
+init: "F"
+rules:
+  - "F => A{10}+{0:10}F (0.9), A{10}[+{90:10}B][-{90:10}B]+{0:10}A{10}B (0.05), A{10}[+{90:10}B][-{90:10}B] (0.05)"
+  - "B => A{10} (0.5), A{10}F"
+constants: "FB"
+scale: 10
+angle: 90
+iteration: 50
