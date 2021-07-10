@@ -84,7 +84,7 @@ void LTurtle::draw(bool adjust) {
   if (adjust)
     this->adjust();
 
-  ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
+  ImVec4 clear_color = ImVec4(89.0/255.0f, 88.0/255.0f, 87.0/255.0f, 1.00f);
 
   int cnt = 0;
   while (!glfwWindowShouldClose(window)) {
@@ -198,9 +198,7 @@ void LTurtle::save() {
 }
 
 void LTurtle::restore() {
-  if (!stack.empty()) {
-    pos = stack.top();
-    stack.pop();
-  }
+  pos = stack.top();
+  stack.pop();
 }
 
