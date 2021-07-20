@@ -11,7 +11,7 @@ public:
   void add_rule(Rule rule);
   void add_rule(std::string srule);
 
-  void iterate(int n = 1);
+  virtual void iterate(int n = 1);
   std::string get_condition() { return variable; }
 
   void show_rules() {
